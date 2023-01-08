@@ -54,6 +54,7 @@ public class DynTimerActivity extends AppCompatActivity {
         hourPicker.setValue(8);
         minutePicker.setValue(0);
 
+        //Set minimum and maximum values for the number and hour picker.
         hourPicker.setMinValue(0);
         hourPicker.setMaxValue(11);
 
@@ -62,11 +63,12 @@ public class DynTimerActivity extends AppCompatActivity {
     }
 
     public void setTimer(View view) {
+        //Get values from number picker
         hours = hourPicker.getValue();
         minutes = minutePicker.getValue();
 
         // For debug reasons, send to main activity
-        dynIntent = new Intent(getApplicationContext(),MainActivity.class);
+        dynIntent = new Intent(getApplicationContext(),AlarmActivity.class);
         bundle = new Bundle();
         bundle.putInt("Hours",hours);
         bundle.putInt("Mins",minutes);
