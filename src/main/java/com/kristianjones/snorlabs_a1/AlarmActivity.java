@@ -5,6 +5,8 @@ import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 
 import androidx.annotation.Nullable;
@@ -12,6 +14,9 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class AlarmActivity extends AppCompatActivity {
+
+    // Generic tag as Log identifier
+    static final String TAG = AlarmActivity.class.getName();
 
     Bundle bundle;
     Bundle finalBundle;
@@ -28,6 +33,8 @@ public class AlarmActivity extends AppCompatActivity {
     Intent dynIntent;
     Intent alarmIntent;
 
+    Spinner settingSpinner;
+
     TimePicker timePicker;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -36,8 +43,19 @@ public class AlarmActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm);
 
+        // Declare all variables
+        settingSpinner = findViewById(R.id.optionsSpinner3);
         timePicker = findViewById(R.id.timePicker);
 
+        // Set settings array adaptor, linked to the 'settings' string in strings.xml
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.settings, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+
+        //Set spinner to arrayAdaptor
+        settingSpinner.setAdapter(adapter);
+
+        // Check android build version code for minimum version
+        // Set alarm value to current value.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             calendar = Calendar.getInstance();
             hourNow = calendar.get(Calendar.HOUR_OF_DAY);
@@ -51,6 +69,7 @@ public class AlarmActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void setAlarm (View view) {
 
+        // Pull timer values from bundle for next intent.
         dynIntent = getIntent();
         bundle = dynIntent.getExtras();
 
@@ -60,16 +79,18 @@ public class AlarmActivity extends AppCompatActivity {
         alarmHour = timePicker.getHour();
         alarmMinute = timePicker.getMinute();
 
+        // Convert TimePicker values into normal integers
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             calendar.set(Calendar.HOUR_OF_DAY,alarmHour);
             calendar.set(Calendar.MINUTE,alarmMinute);
             calendar.set(Calendar.SECOND,0);
         }
 
-        alarmIntent = new Intent(getApplicationContext(),MainActivity.class);
+        alarmIntent = new Intent(getApplicationContext(),SleepActivity.class);
 
         finalBundle = new Bundle();
 
+        // Put all integers for timer and alarm into single bundle.
         finalBundle.putInt("timerH",timerHour);
         finalBundle.putInt("timerM",timerMinute);
         finalBundle.putInt("alarmH",alarmHour);

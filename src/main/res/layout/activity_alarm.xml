@@ -84,7 +84,7 @@
         app:layout_constraintTop_toBottomOf="@+id/snorImageView" />
 
     <Spinner
-        android:id="@+id/optionsSpinner2"
+        android:id="@+id/optionsSpinner3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"

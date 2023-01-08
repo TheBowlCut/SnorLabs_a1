@@ -19,7 +19,7 @@ import androidx.core.app.ActivityCompat;
 public class DynTimerActivity extends AppCompatActivity {
 
     // Generic tag as Log identifier
-    static final String TAG = MainActivity.class.getName();
+    static final String TAG = DynTimerActivity.class.getName();
 
     Bundle bundle;
 
