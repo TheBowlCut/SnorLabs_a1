@@ -26,10 +26,10 @@ public class AlertReceiver extends BroadcastReceiver {
 
         // end of pending intent try1
 
-        Intent regIntent = new Intent(context, com.kristianjones.snorlabs_a1.AlertReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 1, regIntent,
-                PendingIntent.FLAG_CANCEL_CURRENT | FLAG_MUTABLE);
-        pendingIntent.cancel();
+        //Intent regIntent = new Intent(context, com.kristianjones.snorlabs_a1.AlertReceiver.class);
+        //PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 1, regIntent,
+        //        PendingIntent.FLAG_CANCEL_CURRENT | FLAG_MUTABLE);
+        //pendingIntent.cancel();
 
         startService(context,intent);
 
