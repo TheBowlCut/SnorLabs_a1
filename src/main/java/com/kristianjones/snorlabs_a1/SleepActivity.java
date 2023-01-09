@@ -1,6 +1,8 @@
 package com.kristianjones.snorlabs_a1;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -11,6 +13,15 @@ public class SleepActivity extends AppCompatActivity {
 
     // Generic tag as Log identifier
     static final String TAG = SleepActivity.class.getName();
+
+    Bundle bundle;
+
+    Integer timerHour;
+    Integer timerMinute;
+    Integer alarmHour;
+    Integer alarmMinute;
+
+    Intent alarmIntent;
 
     Spinner settingSpinner;
 
@@ -28,5 +39,14 @@ public class SleepActivity extends AppCompatActivity {
 
         //Set spinner to arrayAdaptor
         settingSpinner.setAdapter(adapter);
+
+        alarmIntent = getIntent();
+        bundle = alarmIntent.getExtras();
+
+        timerHour = bundle.getInt("timerH");
+        timerMinute = bundle.getInt("timerM");
+        alarmHour = bundle.getInt("alarmH");
+        alarmMinute = bundle.getInt("alarmM");
+
     }
 }
