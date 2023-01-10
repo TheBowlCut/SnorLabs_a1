@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
@@ -19,18 +20,20 @@ public class AlertReceiver extends BroadcastReceiver {
         final String TRANSITIONS_RECEIVER_ACTION =
                 BuildConfig.APPLICATION_ID + "TRANSITIONS_RECEIVER_ACTION";
 
+        // Generic tag as Log identifier
+        final String TAG = SleepActivity.class.getName();
+
         Intent sleepIntent = new Intent(TRANSITIONS_RECEIVER_ACTION);
         PendingIntent dynPendingIntent = PendingIntent.getBroadcast(context,
                 0, sleepIntent, PendingIntent.FLAG_CANCEL_CURRENT | FLAG_MUTABLE);
         dynPendingIntent.cancel();
-
-        // end of pending intent try1
 
         //Intent regIntent = new Intent(context, com.kristianjones.snorlabs_a1.AlertReceiver.class);
         //PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 1, regIntent,
         //        PendingIntent.FLAG_CANCEL_CURRENT | FLAG_MUTABLE);
         //pendingIntent.cancel();
 
+        Log.d(TAG, "onReceive");
         startService(context,intent);
 
     }

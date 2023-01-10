@@ -13,9 +13,6 @@ import androidx.core.app.NotificationCompat;
 
 public class AlarmService extends Service {
 
-    public static final String channel1ID = "Channel1ID";
-    public static final String channel1Name = "Channel 1";
-
     private MediaPlayer mediaPlayer;
     private Vibrator vibrator;
 
@@ -23,6 +20,7 @@ public class AlarmService extends Service {
     public void onCreate() {
         super.onCreate();
 
+        // Initialises media and vibrators
         mediaPlayer = MediaPlayer.create(this,R.raw.bell);
         mediaPlayer.setLooping(true);
 
@@ -32,11 +30,11 @@ public class AlarmService extends Service {
 
     public int onStartCommand(Intent intent, int flags, int startId){
 
+        // Sets up notification builder, adds in notification tab
         Log.i("AlarmService","onStartCommand");
 
-
         NotificationHelper notificationHelper = new NotificationHelper(this);
-        NotificationCompat.Builder nb = notificationHelper.getChannel1Notification("A8.1","Regular Alarm");
+        NotificationCompat.Builder nb = notificationHelper.getChannel1Notification("SnorLabs","Regular Alarm");
         notificationHelper.getManager().notify(1,nb.build());
 
         mediaPlayer.start();
@@ -44,8 +42,8 @@ public class AlarmService extends Service {
         long[] pattern = { 0, 100, 1000 };
         vibrator.vibrate(pattern,0);
 
-        //This needs changing
-        Intent notificationIntent = new Intent(this,MainActivity.class);
+        //Intent to send to CancelActivity.java
+        Intent notificationIntent = new Intent(this,CancelActivity.class);
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(notificationIntent);
 

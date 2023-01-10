@@ -45,7 +45,7 @@ public class NotificationHelper extends ContextWrapper {
     }
 
     public NotificationCompat.Builder getChannel1Notification(String title, String message) {
-        Intent resultIntent = new Intent(this, MainActivity.class);
+        Intent resultIntent = new Intent(this, CancelActivity.class);
         PendingIntent pendingIntentResult = PendingIntent.getActivity(this,1,
                 resultIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 

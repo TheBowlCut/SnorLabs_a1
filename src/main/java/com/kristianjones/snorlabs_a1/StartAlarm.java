@@ -5,12 +5,16 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
 import static android.app.PendingIntent.FLAG_MUTABLE;
 
 public class StartAlarm {
+
+    // Generic tag as Log identifier
+    static final String TAG = SleepActivity.class.getName();
 
     private int hour;
     private int minute;
@@ -25,6 +29,8 @@ public class StartAlarm {
         c.set(java.util.Calendar.HOUR_OF_DAY, alarmHours);
         c.set(java.util.Calendar.MINUTE,alarmMins);
         c.set(java.util.Calendar.SECOND,snoozeSeconds);
+
+        Log.d(TAG,"alarmHours = " + alarmHours);
 
         // Set up an AlarmManager for monitored of time
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
