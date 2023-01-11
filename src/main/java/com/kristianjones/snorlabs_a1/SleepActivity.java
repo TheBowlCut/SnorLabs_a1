@@ -1,6 +1,11 @@
 package com.kristianjones.snorlabs_a1;
 
+import android.annotation.SuppressLint;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,13 +17,29 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.location.ActivityRecognition;
+import com.google.android.gms.location.SleepClassifyEvent;
+import com.google.android.gms.location.SleepSegmentRequest;
+import com.google.android.gms.tasks.Task;
+
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.List;
+
+import static com.google.android.gms.location.SleepClassifyEvent.extractEvents;
 
 public class SleepActivity extends AppCompatActivity {
 
     // Generic tag as Log identifier
     static final String TAG = SleepActivity.class.getName();
+
+    // Review check for devices with Android 10 (29+). Already covered for 28 and below.
+    // Need to be covered for 29 and beyond.
+    // Action fired when transitions are triggered.
+    private final String TRANSITIONS_RECEIVER_ACTION =
+            BuildConfig.APPLICATION_ID + "TRANSITIONS_RECEIVER_ACTION";
+
+    Boolean alarmActive;
 
     Bundle bundle;
 
@@ -28,8 +49,20 @@ public class SleepActivity extends AppCompatActivity {
     Integer alarmMinute;
 
     Intent alarmIntent;
+    Intent timerIntent;
+
+    Long timerHourMilli;
+    Long timerMinuteMilli;
+    Long totalMilli;
+
+    PendingIntent timerPendingIntent;
+
+    // Broadcast receiver to register whether user is asleep - SleepReceiver
+    SleepReceiver sleepReceiver;
 
     Spinner settingSpinner;
+
+    Task<Void> task;
 
     TextView descTextView;
 
@@ -39,9 +72,13 @@ public class SleepActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sleep);
 
+        // We are here - all alarms are set and permission has been granted. Set alarmActive = True
+        alarmActive = true;
+
         // Declare all variables
         settingSpinner = findViewById(R.id.optionsSpinner4);
         descTextView = findViewById(R.id.descTextView3);
+        sleepReceiver = new SleepReceiver();
 
         // Set settings array adaptor, linked to the 'settings' string in strings.xml
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.settings, android.R.layout.simple_spinner_item);
@@ -70,11 +107,56 @@ public class SleepActivity extends AppCompatActivity {
 
         //Initialise alarm service
         StartAlarm alarm = new StartAlarm(getApplicationContext(), alarmHour, alarmMinute, 0);
+
+        //Initialise countdown - first need to convert data to milliseconds.
+        if (Build.VERSION.SDK_INT >= 31) {
+            convertToMilli(timerHour, timerMinute);
+        }
     }
 
-    private void updateRegText(Calendar c) {
+    protected void onStart() {
+        super.onStart();
+        Log.d(TAG,"onStart");
+        registerReceiver(sleepReceiver, new IntentFilter(TRANSITIONS_RECEIVER_ACTION));
+    }
+
+    public void updateRegText(Calendar c) {
         String timeText = "Latest wake up: ";
         timeText += DateFormat.getTimeInstance(DateFormat.SHORT).format(c.getTime());
         descTextView.setText(timeText);
     }
+
+    @RequiresApi(api = 31)
+    public void convertToMilli(Integer hours, Integer minutes) {
+
+        // Convert the timer values into milliseconds for the countdown service
+        timerHourMilli = (long) (hours*3.6e6);
+        timerMinuteMilli = (long) (minutes*3.6e6);
+
+        // Combine milliseconds of hours and minutes
+        totalMilli = timerHourMilli + timerMinuteMilli;
+
+        startTracking();
+    }
+
+    @RequiresApi(api = 31)
+    public void startTracking() {
+
+        // Activate sleep segment requests using pending intent to listen to activityRecognition API
+        // Broadcast receiver with Intent filter TRANSITIONS_RECEIVER_ACTION - this is linked to the
+        // sleepReceiver. When this intent is activated through the pendingIntent, it activates the
+        // sleep receiver.
+
+        timerIntent = new Intent(TRANSITIONS_RECEIVER_ACTION);
+
+        timerPendingIntent = PendingIntent.getBroadcast(this,
+                0, timerIntent, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_MUTABLE);
+
+        SleepSegmentRequest sleepSegmentRequest = null;
+
+        task = ActivityRecognition.getClient(this).requestSleepSegmentUpdates(timerPendingIntent,
+                SleepSegmentRequest.getDefaultSleepSegmentRequest());
+
+    }
+
 }

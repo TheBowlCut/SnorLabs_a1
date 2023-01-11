@@ -29,6 +29,7 @@
         <activity android:name=".SleepActivity"/>
         <activity android:name=".CancelActivity"/>
         <receiver android:name=".AlertReceiver" />
+        <receiver android:name=".SleepReceiver" />
         <service android:name=".AlarmService"/>
         <meta-data
             android:name="preloaded_fonts"
