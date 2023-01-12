@@ -149,6 +149,8 @@ public class SleepActivity extends AppCompatActivity {
 
         timerIntent = new Intent(TRANSITIONS_RECEIVER_ACTION);
 
+        timerIntent.putExtra("totalMilli",totalMilli);
+
         timerPendingIntent = PendingIntent.getBroadcast(this,
                 0, timerIntent, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_MUTABLE);
 
