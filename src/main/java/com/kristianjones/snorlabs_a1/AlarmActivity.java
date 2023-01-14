@@ -76,6 +76,7 @@ public class AlarmActivity extends AppCompatActivity {
         timerHour = bundle.getInt("Hours");
         timerMinute = bundle.getInt("Mins");
 
+        // Looking at timePicker values selected by user
         alarmHour = timePicker.getHour();
         alarmMinute = timePicker.getMinute();
 

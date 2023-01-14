@@ -53,6 +53,7 @@ public class CountdownService extends Service {
     Countdown timer is reading in, but multiple countdown timers are being started.
     This is because there is no boolean monitoring if an alarm has already started. Whenever a
     broadcast is being received, a new timer is starting.
+    ADD COMMENTS BEFORE CONTINUING.
      */
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {

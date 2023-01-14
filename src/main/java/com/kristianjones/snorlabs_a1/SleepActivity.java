@@ -121,6 +121,7 @@ public class SleepActivity extends AppCompatActivity {
     }
 
     public void updateRegText(Calendar c) {
+        // Setting text view to time selected by user
         String timeText = "Latest wake up: ";
         timeText += DateFormat.getTimeInstance(DateFormat.SHORT).format(c.getTime());
         descTextView.setText(timeText);
