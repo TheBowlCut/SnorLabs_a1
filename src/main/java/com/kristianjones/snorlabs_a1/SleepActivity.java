@@ -41,6 +41,9 @@ public class SleepActivity extends AppCompatActivity {
 
     Boolean alarmActive;
 
+    // timerActive is static so it can be accessed in SleepReceiver,
+    static Boolean timerActive;
+
     Bundle bundle;
 
     Integer timerHour;
@@ -54,6 +57,7 @@ public class SleepActivity extends AppCompatActivity {
     Long timerHourMilli;
     Long timerMinuteMilli;
     Long totalMilli;
+    Long timerTimeLeft;
 
     PendingIntent timerPendingIntent;
 
@@ -65,6 +69,7 @@ public class SleepActivity extends AppCompatActivity {
     Task<Void> task;
 
     TextView descTextView;
+    TextView titleTextView;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -75,9 +80,13 @@ public class SleepActivity extends AppCompatActivity {
         // We are here - all alarms are set and permission has been granted. Set alarmActive = True
         alarmActive = true;
 
+        // Timer will not have started unless sleep confidence is recorded, initialise as false.
+        timerActive = false;
+
         // Declare all variables
         settingSpinner = findViewById(R.id.optionsSpinner4);
         descTextView = findViewById(R.id.descTextView3);
+        titleTextView = findViewById(R.id.titleTextView3);
         sleepReceiver = new SleepReceiver();
 
         // Set settings array adaptor, linked to the 'settings' string in strings.xml
@@ -118,6 +127,14 @@ public class SleepActivity extends AppCompatActivity {
         super.onStart();
         Log.d(TAG,"onStart");
         registerReceiver(sleepReceiver, new IntentFilter(TRANSITIONS_RECEIVER_ACTION));
+        registerReceiver(dynamicReceiver, new IntentFilter(CountdownService.countdownService));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG,"onResume");
+        //registerReceiver(dynamicReceiver, new IntentFilter(CountdownService.countdownService));
     }
 
     public void updateRegText(Calendar c) {
@@ -151,6 +168,7 @@ public class SleepActivity extends AppCompatActivity {
         timerIntent = new Intent(TRANSITIONS_RECEIVER_ACTION);
 
         timerIntent.putExtra("totalMilli",totalMilli);
+        timerIntent.putExtra("timerActive",timerActive);
 
         timerPendingIntent = PendingIntent.getBroadcast(this,
                 0, timerIntent, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_MUTABLE);
@@ -162,4 +180,22 @@ public class SleepActivity extends AppCompatActivity {
 
     }
 
+    public BroadcastReceiver dynamicReceiver = new BroadcastReceiver() {
+        @SuppressLint("SetTextI18n")
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            //Listens to broadcast from CountdownService.
+            //Receives the amount of time left and displays it in a text view
+
+            timerTimeLeft = intent.getLongExtra("countdownTimer",0);
+
+            if (timerTimeLeft > 0) {
+                titleTextView.setText("Sleep timer left: " + String.valueOf(timerTimeLeft/1000));
+            } else {
+                titleTextView.setText("Timer complete");
+            }
+
+        }
+    };
 }

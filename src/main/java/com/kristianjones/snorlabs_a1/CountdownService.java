@@ -1,6 +1,8 @@
 package com.kristianjones.snorlabs_a1;
 
+import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -8,6 +10,8 @@ import android.os.IBinder;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+
+import static android.app.PendingIntent.FLAG_MUTABLE;
 
 /**
  * This service starts, pauses and ends the countdown timer required
@@ -31,6 +35,7 @@ public class CountdownService extends Service {
     public static final String countdownService = "com.kristianjones.snorlabs_a1.CountdownService";
 
     // Initialise parameters
+
     CountDownTimer countDownTimer;
 
     Intent countdownIntent;
@@ -68,20 +73,34 @@ public class CountdownService extends Service {
             @Override
             public void onTick(long millisUntilFinished) {
                 Log.d(TAG,"Countdown Time Remaining: " + millisUntilFinished);
-                //countdownIntent.putExtra("COUNTDOWN_TIMER",millisUntilFinished);
-                //sendBroadcast(countdownIntent);
+
+                //Send a broadcast back to sleep activity with remaining time left
+                //Need to include somewhere to say timer is now active. Don't need to include an extra
+                //value in intent, when the broadcast is received, just set the bool to true in
+                // the receiver.
+
+                countdownIntent.putExtra("countdownTimer",millisUntilFinished);
+                sendBroadcast(countdownIntent);
 
             }
 
             @Override
             public void onFinish() {
                 Log.i(TAG,"Timer Finished");
-                //countdownIntent.putExtra("COUNTDOWN_TIMER",0);
-                //sendBroadcast(countdownIntent);
+
+                // Set up intent to initialise AlarmReceiver, a broadcast receiver.
+                // PendingIntent links to alarm receiver. When a broadcast is received, the
+                //Intent alertIntent = new Intent(this, AlertReceiver.class);
+
+                countdownIntent.putExtra("countdownTimer",0);
+                sendBroadcast(countdownIntent);
+
+                Intent alertIntent = new Intent(getBaseContext(),AlertReceiver.class);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(getBaseContext(), 1, alertIntent,
+                        PendingIntent.FLAG_CANCEL_CURRENT | FLAG_MUTABLE);
 
             }
         }.start();
-
 
         return super.onStartCommand(intent, flags, startId);
     }
