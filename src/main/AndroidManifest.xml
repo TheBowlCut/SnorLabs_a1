@@ -29,7 +29,6 @@
         <activity android:name=".SleepActivity"/>
         <activity android:name=".CancelActivity"/>
         <receiver android:name=".AlertReceiver" />
-        <receiver android:name=".SleepReceiver" />
         <service android:name=".AlarmService"/>
         <service android:name=".CountdownService"/>
         <meta-data

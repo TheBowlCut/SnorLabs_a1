@@ -1,6 +1,7 @@
 package com.kristianjones.snorlabs_a1;
 
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -9,6 +10,7 @@ import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -23,6 +25,7 @@ import com.google.android.gms.location.SleepSegmentRequest;
 import com.google.android.gms.tasks.Task;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -40,12 +43,14 @@ public class SleepActivity extends AppCompatActivity {
             BuildConfig.APPLICATION_ID + "TRANSITIONS_RECEIVER_ACTION";
 
     Boolean alarmActive;
+    Boolean debugMode;
 
     // timerActive is static so it can be accessed in SleepReceiver,
     static Boolean timerActive;
 
     Bundle bundle;
 
+    Integer confLimit;
     Integer timerHour;
     Integer timerMinute;
     Integer alarmHour;
@@ -53,6 +58,7 @@ public class SleepActivity extends AppCompatActivity {
 
     Intent alarmIntent;
     Intent timerIntent;
+    Intent countdownIntent;
 
     Long timerHourMilli;
     Long timerMinuteMilli;
@@ -123,6 +129,31 @@ public class SleepActivity extends AppCompatActivity {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void cancelAll (View view) {
+
+        // Cancels all services
+        // Cancels the alarm service. OnDestroy, the service will shut down.
+        Intent alarmIntentService = new Intent(getApplicationContext(), AlarmService.class);
+        getApplicationContext().stopService(alarmIntentService);
+
+        // Cancels the countdown service. OnDestroy, the service will shut down.
+        if (timerActive) {
+            timerActive = false;
+            timerPendingIntent.cancel();
+            unregisterReceiver(sleepReceiver);
+            Intent countdownIntentService = new Intent(getApplicationContext(), CountdownService.class);
+            getApplicationContext().stopService(countdownIntentService);
+        } else {
+            timerPendingIntent.cancel();
+            unregisterReceiver(sleepReceiver);
+        }
+
+        // Once service is shut down, the app will return to main activity.
+        Intent cancelIntent = new Intent(getApplicationContext(),MainActivity.class);
+        startActivity(cancelIntent);
+    }
+
     protected void onStart() {
         super.onStart();
         Log.d(TAG,"onStart");
@@ -181,6 +212,74 @@ public class SleepActivity extends AppCompatActivity {
 
     }
 
+    public class SleepReceiver extends BroadcastReceiver {
+        //Broadcast receiver looking for activity recognition broadcasts
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            Log.d(TAG, "totalMilli = " + totalMilli);
+            Log.d(TAG, "timerActive = " + timerActive);
+
+            //DEBUG MODE - When just wanting to check whether code works, this will set the sleep
+            // confidence level to 1. When not in DEBUG MODE, this will set the receiver to
+            // X (95 as of 15/01/2023)
+            debugMode = true;
+
+            if (debugMode) {
+                confLimit = 1;
+            } else {
+                confLimit = 95;
+            }
+
+            // Initialising a list, API driven list with timestamp, sleep confidence,  device motion,
+            // ambient light level.
+            List<SleepClassifyEvent> sleepClassifyEvents;
+
+            // Extract the required info from the activity recognition broadcast (intent)
+            sleepClassifyEvents = extractEvents(intent);
+
+            Log.d(TAG, "sleepClassifyEvents = " + sleepClassifyEvents);
+
+            if (SleepClassifyEvent.hasEvents(intent)) {
+                // If the intent has the required sleepActivity info, this loop reviews the data.
+                Log.d(TAG, "hasEvents True");
+
+                // Is this duplication of line 40?
+                List<SleepClassifyEvent> result = extractEvents(intent);
+
+                // Initialising an array to store sleepConfidence values
+                ArrayList<Integer> sleepConfidence = new ArrayList<>();
+
+                for (SleepClassifyEvent event : result) {
+
+                    // Pulls out the sleepConfidence value from the SleepClassifyEventList
+                    int confTimerInt = event.getConfidence();
+
+                    // Add the sleep confidence value to the sleepConfidence array.
+                    sleepConfidence.add(event.getConfidence());
+
+                    //if there is no timer started (!timerActive), activate timer.
+                    if (confTimerInt > confLimit && !timerActive) {
+
+                        // Set timerActive as true, this should stop countdown timers being
+                        // set in the future
+                        timerActive = true;
+                        countdownIntent = new Intent(context, CountdownService.class);
+                        countdownIntent.putExtra("totalMilli", totalMilli);
+                        context.startService(countdownIntent);
+
+                        // if there is a timer started, go here
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
     public BroadcastReceiver dynamicReceiver = new BroadcastReceiver() {
         @SuppressLint("SetTextI18n")
         @Override
@@ -188,10 +287,6 @@ public class SleepActivity extends AppCompatActivity {
 
             //Listens to broadcast from CountdownService.
             //Receives the amount of time left and displays it in a text view
-
-            //17 Jan 2023 Try again putting the Boolean in here now it is static
-
-            timerActive = true;
 
             timerTimeLeft = intent.getLongExtra("countdownTimer",0);
 
