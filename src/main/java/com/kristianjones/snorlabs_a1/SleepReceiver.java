@@ -1,5 +1,6 @@
 package com.kristianjones.snorlabs_a1;
 
+import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -19,6 +20,7 @@ public class SleepReceiver extends BroadcastReceiver {
     static final String TAG = SleepReceiver.class.getName();
 
     Boolean debugMode;
+    static Boolean timerActive;
 
     Integer confLimit;
     Intent countdownIntent;
@@ -32,10 +34,10 @@ public class SleepReceiver extends BroadcastReceiver {
         intent.getExtras();
 
         totalMilli = intent.getLongExtra("totalMilli",0);
-        SleepActivity.timerActive = intent.getBooleanExtra("timerActive",false);
+        timerActive = intent.getBooleanExtra("timerActive",false);
 
         Log.d(TAG, "totalMilli = " + totalMilli);
-        Log.d(TAG, "timerActive = " + SleepActivity.timerActive);
+        Log.d(TAG, "timerActive = " + timerActive);
 
         //DEBUG MODE - When just wanting to check whether code works, this will set the sleep
         // confidence level to 1. When not in DEBUG MODE, this will set the receiver to
@@ -76,11 +78,11 @@ public class SleepReceiver extends BroadcastReceiver {
                 sleepConfidence.add(event.getConfidence());
 
                 //if there is no timer started (!timerActive), activate timer.
-                if (confTimerInt > confLimit && !SleepActivity.timerActive) {
+                if (confTimerInt > confLimit && !timerActive) {
 
                     // Set timerActive as true, this should stop countdown timers being
                     // set in the future
-                    SleepActivity.timerActive = true;
+                    timerActive = true;
                     countdownIntent = new Intent(context, CountdownService.class);
                     countdownIntent.putExtra("totalMilli", totalMilli);
                     context.startService(countdownIntent);
@@ -91,5 +93,8 @@ public class SleepReceiver extends BroadcastReceiver {
             }
 
         }
+
     }
+
+
 }

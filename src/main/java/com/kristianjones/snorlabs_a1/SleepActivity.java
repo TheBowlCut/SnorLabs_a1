@@ -166,9 +166,10 @@ public class SleepActivity extends AppCompatActivity {
         // sleep receiver.
 
         timerIntent = new Intent(TRANSITIONS_RECEIVER_ACTION);
+        Log.d(TAG,"timerActive = " + timerActive);
 
         timerIntent.putExtra("totalMilli",totalMilli);
-        timerIntent.putExtra("timerActive",timerActive);
+        timerIntent.putExtra("timerActive = ",timerActive);
 
         timerPendingIntent = PendingIntent.getBroadcast(this,
                 0, timerIntent, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_MUTABLE);
@@ -187,6 +188,10 @@ public class SleepActivity extends AppCompatActivity {
 
             //Listens to broadcast from CountdownService.
             //Receives the amount of time left and displays it in a text view
+
+            //17 Jan 2023 Try again putting the Boolean in here now it is static
+
+            timerActive = true;
 
             timerTimeLeft = intent.getLongExtra("countdownTimer",0);
 
