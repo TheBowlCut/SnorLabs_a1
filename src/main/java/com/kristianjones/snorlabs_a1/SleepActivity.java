@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import static android.app.PendingIntent.FLAG_MUTABLE;
 import static com.google.android.gms.location.SleepClassifyEvent.extractEvents;
 
 public class SleepActivity extends AppCompatActivity {
@@ -136,6 +137,13 @@ public class SleepActivity extends AppCompatActivity {
         // Cancels the alarm service. OnDestroy, the service will shut down.
         Intent alarmIntentService = new Intent(getApplicationContext(), AlarmService.class);
         getApplicationContext().stopService(alarmIntentService);
+
+        // Set up alarmManager, intent and pendingIntent identical to StartAlarm, in order to cancel it.
+        AlarmManager alarmManager = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+        Intent alertIntent = new Intent(getApplicationContext(), AlertReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 1, alertIntent,
+                PendingIntent.FLAG_CANCEL_CURRENT | FLAG_MUTABLE);
+        alarmManager.cancel(pendingIntent);
 
         // Cancels the countdown service. OnDestroy, the service will shut down.
         if (timerActive) {
