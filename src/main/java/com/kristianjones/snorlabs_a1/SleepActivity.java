@@ -45,8 +45,7 @@ public class SleepActivity extends AppCompatActivity {
 
     Boolean alarmActive;
     Boolean debugMode;
-
-    // timerActive is static so it can be accessed in SleepReceiver,
+    static Boolean timerStarted;
     static Boolean timerActive;
 
     Bundle bundle;
@@ -89,6 +88,7 @@ public class SleepActivity extends AppCompatActivity {
 
         // Timer will not have started unless sleep confidence is recorded, initialise as false.
         timerActive = false;
+        timerStarted = false;
 
         // Declare all variables
         settingSpinner = findViewById(R.id.optionsSpinner4);
@@ -148,6 +148,7 @@ public class SleepActivity extends AppCompatActivity {
         // Cancels the countdown service. OnDestroy, the service will shut down.
         if (timerActive) {
             timerActive = false;
+            timerStarted = false;
             timerPendingIntent.cancel();
             unregisterReceiver(sleepReceiver);
             Intent countdownIntentService = new Intent(getApplicationContext(), CountdownService.class);
@@ -160,6 +161,22 @@ public class SleepActivity extends AppCompatActivity {
         // Once service is shut down, the app will return to main activity.
         Intent cancelIntent = new Intent(getApplicationContext(),MainActivity.class);
         startActivity(cancelIntent);
+    }
+
+    @SuppressLint("SetTextI18n")
+    public void pauseAll (View view) {
+        // JUST A DEBUG FUNCTION - it will pause the alarm.
+        // Why is it useful? It will force pause the timer, and can validate if the timer resumes
+        // once new broadcast is received.
+
+        if (timerActive) {
+
+            timerActive = false;
+            stopService(countdownIntent);
+            titleTextView.setText("Paused, remaining: " + timerTimeLeft);
+
+        }
+
     }
 
     protected void onStart() {
@@ -188,7 +205,7 @@ public class SleepActivity extends AppCompatActivity {
 
         // Convert the timer values into milliseconds for the countdown service
         timerHourMilli = (long) (hours*3.6e6);
-        timerMinuteMilli = (long) (minutes*3.6e6);
+        timerMinuteMilli = (long) (minutes*6e4);
 
         // Combine milliseconds of hours and minutes
         totalMilli = timerHourMilli + timerMinuteMilli;
@@ -205,10 +222,6 @@ public class SleepActivity extends AppCompatActivity {
         // sleep receiver.
 
         timerIntent = new Intent(TRANSITIONS_RECEIVER_ACTION);
-        Log.d(TAG,"timerActive = " + timerActive);
-
-        timerIntent.putExtra("totalMilli",totalMilli);
-        timerIntent.putExtra("timerActive = ",timerActive);
 
         timerPendingIntent = PendingIntent.getBroadcast(this,
                 0, timerIntent, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_MUTABLE);
@@ -223,11 +236,9 @@ public class SleepActivity extends AppCompatActivity {
     public class SleepReceiver extends BroadcastReceiver {
         //Broadcast receiver looking for activity recognition broadcasts
 
+        @SuppressLint("SetTextI18n")
         @Override
         public void onReceive(Context context, Intent intent) {
-
-            Log.d(TAG, "totalMilli = " + totalMilli);
-            Log.d(TAG, "timerActive = " + timerActive);
 
             //DEBUG MODE - When just wanting to check whether code works, this will set the sleep
             // confidence level to 1. When not in DEBUG MODE, this will set the receiver to
@@ -267,17 +278,36 @@ public class SleepActivity extends AppCompatActivity {
                     // Add the sleep confidence value to the sleepConfidence array.
                     sleepConfidence.add(event.getConfidence());
 
-                    //if there is no timer started (!timerActive), activate timer.
-                    if (confTimerInt > confLimit && !timerActive) {
-
+                    //LOOP 1: if there is no timer started (!timerActive), activate timer.
+                    if (confTimerInt > confLimit && !timerActive && !timerStarted) {
                         // Set timerActive as true, this should stop countdown timers being
                         // set in the future
+                        Log.d(TAG,"LOOP 1");
+                        timerActive = true;
+                        timerStarted = true;
+                        countdownIntent = new Intent(context, CountdownService.class);
+                        countdownIntent.putExtra("totalMilli", totalMilli);
+                        context.startService(countdownIntent);
+
+                        // LOOP 2: If confident User is now awake AFTER timer has started,
+                        // pause the active timer.
+                    } else if (confTimerInt < confLimit && timerActive && timerStarted) {
+                        Log.d(TAG,"LOOP 2");
+                        timerActive = false;
+                        stopService(countdownIntent);
+                        titleTextView.setText("Paused, remaining: " + timerTimeLeft);
+
+                        // LOOP 3: If confider User is now asleep AFTER timer has started,
+                        // but timer is not active (Has been paused), resume the timer
+                        // Confidence is high user is asleep, timer has already been started,
+                        // but timer is not currently active
+                    } else if (confTimerInt > confLimit && timerStarted && !timerActive) {
+                        Log.d(TAG,"LOOP 3");
                         timerActive = true;
                         countdownIntent = new Intent(context, CountdownService.class);
                         countdownIntent.putExtra("totalMilli", totalMilli);
                         context.startService(countdownIntent);
 
-                        // if there is a timer started, go here
                     }
 
                 }

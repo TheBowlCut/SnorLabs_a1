@@ -84,6 +84,7 @@
         android:layout_height="44dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/roboto_bold"
+        android:onClick="pauseAll"
         android:text="Pause"
         app:backgroundTint="#C00003"
         app:layout_constraintEnd_toEndOf="parent"
