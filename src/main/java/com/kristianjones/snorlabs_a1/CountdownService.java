@@ -96,8 +96,8 @@ public class CountdownService extends Service {
                 sendBroadcast(countdownIntent);
 
                 Intent alertIntent = new Intent(getBaseContext(),AlertReceiver.class);
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(getBaseContext(), 1, alertIntent,
-                        PendingIntent.FLAG_CANCEL_CURRENT | FLAG_MUTABLE);
+                alertIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(alertIntent);
 
             }
         }.start();

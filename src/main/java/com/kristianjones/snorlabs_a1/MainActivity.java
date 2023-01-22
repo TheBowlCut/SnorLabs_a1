@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
                 result = data.getIntExtra("permissionAccept", 0);
                 dynTimerIntent = new Intent(getApplicationContext(), DynTimerActivity.class);
                 startActivity(dynTimerIntent);
-                            }
+            }
         }
         if (resultCode == Activity.RESULT_CANCELED) {
             Log.d(TAG,"Permission Cancelled");

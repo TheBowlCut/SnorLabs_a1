@@ -173,7 +173,7 @@ public class SleepActivity extends AppCompatActivity {
 
             timerActive = false;
             stopService(countdownIntent);
-            titleTextView.setText("Paused, remaining: " + timerTimeLeft);
+            titleTextView.setText("Paused, remaining: " + timerTimeLeft/1000);
 
         }
 
@@ -246,7 +246,7 @@ public class SleepActivity extends AppCompatActivity {
             debugMode = true;
 
             if (debugMode) {
-                confLimit = 1;
+                confLimit = 0;
             } else {
                 confLimit = 95;
             }
@@ -295,7 +295,7 @@ public class SleepActivity extends AppCompatActivity {
                         Log.d(TAG,"LOOP 2");
                         timerActive = false;
                         stopService(countdownIntent);
-                        titleTextView.setText("Paused, remaining: " + timerTimeLeft);
+                        titleTextView.setText("Paused, remaining: " + timerTimeLeft/1000);
 
                         // LOOP 3: If confider User is now asleep AFTER timer has started,
                         // but timer is not active (Has been paused), resume the timer
@@ -305,7 +305,10 @@ public class SleepActivity extends AppCompatActivity {
                         Log.d(TAG,"LOOP 3");
                         timerActive = true;
                         countdownIntent = new Intent(context, CountdownService.class);
-                        countdownIntent.putExtra("totalMilli", totalMilli);
+                        // This needs to be timerTimeLeft instead of totalMilli.
+                        // totalMilli is start timer value, timerTimeLeft is how much time is
+                        // remaining.
+                        countdownIntent.putExtra("totalMilli", timerTimeLeft);
                         context.startService(countdownIntent);
 
                     }
