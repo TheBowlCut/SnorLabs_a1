@@ -28,7 +28,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/snorlab_circle" />
+        app:srcCompat="@drawable/snorlab_owl" />
 
     <TextView
         android:id="@+id/titleTextView4"
@@ -71,6 +71,7 @@
         android:layout_height="44dp"
         android:layout_marginTop="64dp"
         android:fontFamily="@font/roboto_bold"
+        android:onClick="snoozeAlarm"
         android:text="Snooze"
         app:backgroundTint="#C00003"
         app:layout_constraintEnd_toEndOf="parent"

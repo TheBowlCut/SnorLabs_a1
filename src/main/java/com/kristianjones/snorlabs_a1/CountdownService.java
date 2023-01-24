@@ -95,9 +95,8 @@ public class CountdownService extends Service {
                 countdownIntent.putExtra("countdownTimer",0);
                 sendBroadcast(countdownIntent);
 
-                Intent alertIntent = new Intent(getBaseContext(),AlertReceiver.class);
-                alertIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(alertIntent);
+                Intent alarmIntent = new Intent(getBaseContext(),AlarmService.class);
+                startService(alarmIntent);
 
             }
         }.start();
