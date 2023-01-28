@@ -16,22 +16,12 @@ public class AlertReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        //This section checking if cancelling pending intents work in this section
+        //This section is a Broadcast receiver listening out for the regular alarmManager.
         final String TRANSITIONS_RECEIVER_ACTION =
                 BuildConfig.APPLICATION_ID + "TRANSITIONS_RECEIVER_ACTION";
 
         // Generic tag as Log identifier
         final String TAG = SleepActivity.class.getName();
-
-        Intent sleepIntent = new Intent(TRANSITIONS_RECEIVER_ACTION);
-        PendingIntent dynPendingIntent = PendingIntent.getBroadcast(context,
-                0, sleepIntent, PendingIntent.FLAG_CANCEL_CURRENT | FLAG_MUTABLE);
-        dynPendingIntent.cancel();
-
-        //Intent regIntent = new Intent(context, com.kristianjones.snorlabs_a1.AlertReceiver.class);
-        //PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 1, regIntent,
-        //        PendingIntent.FLAG_CANCEL_CURRENT | FLAG_MUTABLE);
-        //pendingIntent.cancel();
 
         Log.d(TAG, "onReceive");
         startService(context,intent);

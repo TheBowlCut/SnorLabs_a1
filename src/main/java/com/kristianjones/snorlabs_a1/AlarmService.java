@@ -4,11 +4,13 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.IBinder;
 import android.os.Vibrator;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
 public class AlarmService extends Service {
@@ -28,13 +30,14 @@ public class AlarmService extends Service {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public int onStartCommand(Intent intent, int flags, int startId){
 
         // Sets up notification builder, adds in notification tab
         Log.i("AlarmService","onStartCommand");
 
         NotificationHelper notificationHelper = new NotificationHelper(this);
-        NotificationCompat.Builder nb = notificationHelper.getChannel1Notification("SnorLabs","Regular Alarm");
+        NotificationCompat.Builder nb = notificationHelper.getChannel1Notification("SnorLabs","Alarm Complete");
         notificationHelper.getManager().notify(1,nb.build());
 
         mediaPlayer.start();
