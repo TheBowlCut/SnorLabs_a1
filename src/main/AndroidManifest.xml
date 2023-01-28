@@ -23,11 +23,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PermissionActivity" />
-        <activity android:name=".DynTimerActivity" />
-        <activity android:name=".AlarmActivity" />
-        <activity android:name=".SleepActivity"/>
-        <activity android:name=".CancelActivity"/>
+        <activity android:name=".PermissionActivity"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".DynTimerActivity"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".AlarmActivity"
+            android:parentActivityName=".DynTimerActivity"/>
+        <activity android:name=".SleepActivity"
+            android:parentActivityName=".AlarmActivity"/>
+        <activity android:name=".CancelActivity"
+            android:parentActivityName=".SleepActivity"/>
         <receiver android:name=".AlertReceiver" />
         <service android:name=".AlarmService"/>
         <service android:name=".CountdownService"/>

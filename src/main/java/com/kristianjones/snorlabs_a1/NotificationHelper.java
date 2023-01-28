@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
@@ -44,15 +45,26 @@ public class NotificationHelper extends ContextWrapper {
         return mManager;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public NotificationCompat.Builder getChannel1Notification(String title, String message) {
         Intent resultIntent = new Intent(this, CancelActivity.class);
-        PendingIntent pendingIntentResult = PendingIntent.getActivity(this,1,
-                resultIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+        //Need to set up a taskStackBuilder to maintain a back stack, allowing user to press Back
+        //and navigate up the app hierarchy
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        stackBuilder.addNextIntentWithParentStack(resultIntent);
+
+        PendingIntent pendingIntentResult =
+                stackBuilder.getPendingIntent(0,
+                        PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+        //PendingIntent pendingIntentResult = PendingIntent.getActivity(this,1,
+        //        resultIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         return new NotificationCompat.Builder(getApplicationContext(),channel1ID)
                 .setContentTitle(title)
                 .setContentText(message)
-                .setSmallIcon(R.drawable.snorlab_owl)
+                .setSmallIcon(R.drawable.snorlab_app_owl)
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntentResult);
     }
