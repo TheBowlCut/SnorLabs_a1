@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -51,6 +52,25 @@ public class MainActivity extends AppCompatActivity {
 
         //Set spinner to arrayAdaptor
         settingSpinner.setAdapter(adapter);
+
+        //SettingSpinner responding to user selections
+        settingSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Log.d(TAG,"Integer: " + i );
+
+                Intent optionIntent;
+                if (i == 1) {
+                    optionIntent = new Intent(getApplicationContext(), FeedbackActivity.class);
+                    startActivity(optionIntent);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         //Set activityTracking as 0 (Default), assume user hasn't accepted if unsure.
         activityTracking = 0;
