@@ -8,7 +8,7 @@ import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class FeedbackActivity extends AppCompatActivity {
+public class HelpActivity extends AppCompatActivity {
 
     Button backButton;
 
@@ -17,7 +17,7 @@ public class FeedbackActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_feedback);
+        setContentView(R.layout.activity_help);
 
         backButton = findViewById(R.id.backButton);
 

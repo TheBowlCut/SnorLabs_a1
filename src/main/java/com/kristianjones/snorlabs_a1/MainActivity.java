@@ -11,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -61,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent optionIntent;
                 if (i == 1) {
-                    optionIntent = new Intent(getApplicationContext(), FeedbackActivity.class);
+                    optionIntent = new Intent(getApplicationContext(), HelpActivity.class);
                     startActivity(optionIntent);
                 }
             }
