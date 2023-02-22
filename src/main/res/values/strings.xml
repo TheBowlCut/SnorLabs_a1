@@ -8,4 +8,13 @@
 
     <string name="help_text">For additional support, please contact: snorlabs101@help.com</string>
     <string name="back">Back</string>
+    <string name="feedback_beta1">Provide Beta feedback to the developer:</string>
+    <string name="feedback_beta2">1) Open the Play Store</string>
+    <string name="feedback_beta3">2) At the top right, tap the profile icon</string>
+    <string name="feedback_beta4">3) Tap Manage apps and devices> Beta</string>
+    <string name="feedback_beta5">4) Find SnorLabs Beta and tap the app</string>
+    <string name="feedback_beta6">5) Under Private feedback to developer, tap Write feedback</string>
+    <string name="feedback_beta7">6) Please provide your feedback </string>
+    <string name="feedback_beta8">7) Tap Post </string>
+    <string name="feedback_beta9"> Alternatively, please share your experience with snorlabs101@help.com</string>
 </resources>

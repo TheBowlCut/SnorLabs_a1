@@ -60,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent optionIntent;
                 if (i == 1) {
+                    optionIntent = new Intent(getApplicationContext(), FeedbackActivity.class);
+                    startActivity(optionIntent);
+                } else if (i == 2) {
                     optionIntent = new Intent(getApplicationContext(), HelpActivity.class);
                     startActivity(optionIntent);
                 }

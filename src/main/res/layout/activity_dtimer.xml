@@ -68,7 +68,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:fontFamily="sans-serif-medium"
-        android:text="Remember: This timer will not start until  SnorLabs registers you are asleep, and will pause if you wake up"
+        android:text="This timer will not start until  SnorLabs registers you are asleep, and will pause if you wake up"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="18sp"

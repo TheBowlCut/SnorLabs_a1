@@ -242,13 +242,13 @@ public class SleepActivity extends AppCompatActivity {
 
             //DEBUG MODE - When just wanting to check whether code works, this will set the sleep
             // confidence level to 1. When not in DEBUG MODE, this will set the receiver to
-            // X (95 as of 15/01/2023)
-            debugMode = true;
+            // X (94 as of 20/02/2023)
+            debugMode = false;
 
             if (debugMode) {
                 confLimit = 0;
             } else {
-                confLimit = 95;
+                confLimit = 90;
             }
 
             // Initialising a list, API driven list with timestamp, sleep confidence,  device motion,
