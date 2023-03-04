@@ -76,7 +76,9 @@ public class SleepActivity extends AppCompatActivity {
 
     TextView descTextView;
     TextView titleTextView;
+    TextView debugTextView;
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -94,6 +96,7 @@ public class SleepActivity extends AppCompatActivity {
         settingSpinner = findViewById(R.id.optionsSpinner4);
         descTextView = findViewById(R.id.descTextView3);
         titleTextView = findViewById(R.id.titleTextView3);
+        debugTextView = findViewById(R.id.debugTextView);
         sleepReceiver = new SleepReceiver();
 
         // Set settings array adaptor, linked to the 'settings' string in strings.xml
@@ -112,6 +115,9 @@ public class SleepActivity extends AppCompatActivity {
         timerMinute = bundle.getInt("timerM");
         alarmHour = bundle.getInt("alarmH");
         alarmMinute = bundle.getInt("alarmM");
+
+        //Set titleTextView to equal time left
+        titleTextView.setText(getString(R.string.titleTextInitial)+timerHour+":"+timerMinute);
 
         //Set regular alarm
         //First, update TextView with latest wake up time
@@ -135,6 +141,7 @@ public class SleepActivity extends AppCompatActivity {
 
         // Cancels all services
         // Cancels the alarm service. OnDestroy, the service will shut down.
+        Log.d(TAG,"cancelAll");
         Intent alarmIntentService = new Intent(getApplicationContext(), AlarmService.class);
         getApplicationContext().stopService(alarmIntentService);
 
@@ -147,6 +154,7 @@ public class SleepActivity extends AppCompatActivity {
 
         // Cancels the countdown service. OnDestroy, the service will shut down.
         if (timerActive) {
+            Log.d(TAG,"cancelAll");
             timerActive = false;
             timerStarted = false;
             timerPendingIntent.cancel();
@@ -236,6 +244,7 @@ public class SleepActivity extends AppCompatActivity {
     public class SleepReceiver extends BroadcastReceiver {
         //Broadcast receiver looking for activity recognition broadcasts
 
+        @RequiresApi(api = Build.VERSION_CODES.O)
         @SuppressLint("SetTextI18n")
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -243,12 +252,12 @@ public class SleepActivity extends AppCompatActivity {
             //DEBUG MODE - When just wanting to check whether code works, this will set the sleep
             // confidence level to 1. When not in DEBUG MODE, this will set the receiver to
             // X (94 as of 20/02/2023)
-            debugMode = false;
+            debugMode = true;
 
             if (debugMode) {
                 confLimit = 0;
             } else {
-                confLimit = 90;
+                confLimit = 75;
             }
 
             // Initialising a list, API driven list with timestamp, sleep confidence,  device motion,
@@ -274,9 +283,12 @@ public class SleepActivity extends AppCompatActivity {
 
                     // Pulls out the sleepConfidence value from the SleepClassifyEventList
                     int confTimerInt = event.getConfidence();
+                    long confTimeStamp = event.getTimestampMillis();
 
                     // Add the sleep confidence value to the sleepConfidence array.
                     sleepConfidence.add(event.getConfidence());
+
+                    debugTextView.setText("Sleep score: " +confTimerInt + " Timestamp: " +confTimeStamp);
 
                     //LOOP 1: if there is no timer started (!timerActive), activate timer.
                     if (confTimerInt > confLimit && !timerActive && !timerStarted) {
@@ -305,9 +317,6 @@ public class SleepActivity extends AppCompatActivity {
                         Log.d(TAG,"LOOP 3");
                         timerActive = true;
                         countdownIntent = new Intent(context, CountdownService.class);
-                        // This needs to be timerTimeLeft instead of totalMilli.
-                        // totalMilli is start timer value, timerTimeLeft is how much time is
-                        // remaining.
                         countdownIntent.putExtra("totalMilli", timerTimeLeft);
                         context.startService(countdownIntent);
 
