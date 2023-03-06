@@ -65,6 +65,7 @@ public class CountdownService extends Service {
     broadcast is being received, a new timer is starting.
     ADD COMMENTS BEFORE CONTINUING.
      */
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d(TAG,"onStartCommand");
@@ -105,6 +106,21 @@ public class CountdownService extends Service {
 
             }
         }.start();
+
+        final String CHANNELID = "Foreground Service ID";
+        NotificationChannel channel = new NotificationChannel(
+                CHANNELID,
+                CHANNELID,
+                NotificationManager.IMPORTANCE_LOW
+        );
+
+        getSystemService(NotificationManager.class).createNotificationChannel(channel);
+        Notification.Builder notification = new Notification.Builder(this, CHANNELID)
+                .setContentText("Dynamic sleep timer active")
+                .setContentTitle("SnorLabs")
+                .setSmallIcon(R.drawable.snorlab_app_owl);
+
+        startForeground(2,notification.build());
 
         return super.onStartCommand(intent, flags, startId);
     }
