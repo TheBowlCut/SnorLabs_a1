@@ -253,7 +253,7 @@ public class SleepActivity extends AppCompatActivity {
             //DEBUG MODE - When just wanting to check whether code works, this will set the sleep
             // confidence level to 1. When not in DEBUG MODE, this will set the receiver to
             // X (95 as of 08/03/2023)
-            debugMode = false;
+            debugMode = true;
 
             if (debugMode) {
                 confLimit = 0;
@@ -292,7 +292,7 @@ public class SleepActivity extends AppCompatActivity {
                     debugTextView.setText("Sleep score: " +confTimerInt + " Timestamp: " +confTimeStamp);
 
                     //LOOP 1: if there is no timer started (!timerActive), activate timer.
-                    if (confTimerInt > confLimit && !timerActive && !timerStarted) {
+                    if (confTimerInt >= confLimit && !timerActive && !timerStarted) {
                         // Set timerActive as true, this should stop countdown timers being
                         // set in the future
                         Log.d(TAG,"LOOP 1");
@@ -314,7 +314,7 @@ public class SleepActivity extends AppCompatActivity {
                         // but timer is not active (Has been paused), resume the timer
                         // Confidence is high user is asleep, timer has already been started,
                         // but timer is not currently active
-                    } else if (confTimerInt > confLimit && timerStarted && !timerActive) {
+                    } else if (confTimerInt >= confLimit && timerStarted && !timerActive) {
                         Log.d(TAG,"LOOP 3");
                         timerActive = true;
                         countdownIntent = new Intent(context, CountdownService.class);
