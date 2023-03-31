@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.kristianjones.snorlabs_a1"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="17"
+        android:targetSdkVersion="32" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" /> <!-- Required for 29+. -->
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+
+    <application
+        android:allowBackup="true"
+        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+        android:debuggable="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:testOnly="true"
+        android:theme="@style/Theme.SnorLabs_a1" >
+        <activity
+            android:name="com.kristianjones.snorlabs_a1.MainActivity"
+            android:exported="true"
+            android:launchMode="singleTop" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.kristianjones.snorlabs_a1.HelpActivity"
+            android:parentActivityName="com.kristianjones.snorlabs_a1.MainActivity" />
+        <activity
+            android:name="com.kristianjones.snorlabs_a1.FeedbackActivity"
+            android:parentActivityName="com.kristianjones.snorlabs_a1.MainActivity" />
+        <activity
+            android:name="com.kristianjones.snorlabs_a1.PermissionActivity"
+            android:parentActivityName="com.kristianjones.snorlabs_a1.MainActivity" />
+        <activity
+            android:name="com.kristianjones.snorlabs_a1.DynTimerActivity"
+            android:parentActivityName="com.kristianjones.snorlabs_a1.MainActivity" />
+        <activity
+            android:name="com.kristianjones.snorlabs_a1.AlarmActivity"
+            android:parentActivityName="com.kristianjones.snorlabs_a1.DynTimerActivity" />
+        <activity
+            android:name="com.kristianjones.snorlabs_a1.SleepActivity"
+            android:parentActivityName="com.kristianjones.snorlabs_a1.AlarmActivity" />
+        <activity
+            android:name="com.kristianjones.snorlabs_a1.CancelActivity"
+            android:parentActivityName="com.kristianjones.snorlabs_a1.SleepActivity" />
+
+        <receiver android:name="com.kristianjones.snorlabs_a1.AlertReceiver" />
+
+        <service android:name="com.kristianjones.snorlabs_a1.AlarmService" />
+        <service android:name="com.kristianjones.snorlabs_a1.CountdownService" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
+        <activity
+            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+            android:exported="false"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="com.kristianjones.snorlabs_a1.androidx-startup"
+            android:exported="false" >
+            <meta-data
+                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+                android:value="androidx.startup" />
+            <meta-data
+                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+                android:value="androidx.startup" />
+        </provider>
+    </application>
+
+</manifest>

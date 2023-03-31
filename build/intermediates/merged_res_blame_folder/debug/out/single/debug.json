@@ -1,0 +1,154 @@
+[
+    {
+        "merged": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_launcher_background.png.flat",
+        "source": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\generated\\res\\pngs\\debug\\drawable-hdpi\\ic_launcher_background.png"
+    },
+    {
+        "merged": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_launcher_background.png.flat",
+        "source": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\generated\\res\\pngs\\debug\\drawable-mdpi\\ic_launcher_background.png"
+    },
+    {
+        "merged": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_alarm.xml.flat",
+        "source": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\src\\main\\res\\layout\\activity_alarm.xml"
+    },
+    {
+        "merged": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v24_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v24\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher_foreground.png.flat",
+        "source": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_foreground.png"
+    },
+    {
+        "merged": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher_foreground.png.flat",
+        "source": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_foreground.png"
+    },
+    {
+        "merged": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_sleep.xml.flat",
+        "source": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\src\\main\\res\\layout\\activity_sleep.xml"
+    },
+    {
+        "merged": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_dtimer.xml.flat",
+        "source": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\src\\main\\res\\layout\\activity_dtimer.xml"
+    },
+    {
+        "merged": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher_foreground.png.flat",
+        "source": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_foreground.png"
+    },
+    {
+        "merged": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\intermediates\\res\\merged\\debug\\drawable_snorlab_app_owl.png.flat",
+        "source": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\src\\main\\res\\drawable\\snorlab_app_owl.png"
+    },
+    {
+        "merged": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\intermediates\\res\\merged\\debug\\font_roboto_thin.xml.flat",
+        "source": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\src\\main\\res\\font\\roboto_thin.xml"
+    },
+    {
+        "merged": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher_foreground.png.flat",
+        "source": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_foreground.png"
+    },
+    {
+        "merged": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_launcher_background.png.flat",
+        "source": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxhdpi\\ic_launcher_background.png"
+    },
+    {
+        "merged": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_ic_launcher_background.png.flat",
+        "source": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxxhdpi\\ic_launcher_background.png"
+    },
+    {
+        "merged": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_help.xml.flat",
+        "source": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\src\\main\\res\\layout\\activity_help.xml"
+    },
+    {
+        "merged": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi_ic_launcher_background.png.flat",
+        "source": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\generated\\res\\pngs\\debug\\drawable-ldpi\\ic_launcher_background.png"
+    },
+    {
+        "merged": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_launcher_background.png.flat",
+        "source": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\generated\\res\\pngs\\debug\\drawable-xhdpi\\ic_launcher_background.png"
+    },
+    {
+        "merged": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_cancel.xml.flat",
+        "source": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\src\\main\\res\\layout\\activity_cancel.xml"
+    },
+    {
+        "merged": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_snorlab_circle.png.flat",
+        "source": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\src\\main\\res\\drawable-v24\\snorlab_circle.png"
+    },
+    {
+        "merged": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_permission.xml.flat",
+        "source": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\src\\main\\res\\layout\\activity_permission.xml"
+    },
+    {
+        "merged": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\src\\main\\res\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_feedback.xml.flat",
+        "source": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\src\\main\\res\\layout\\activity_feedback.xml"
+    },
+    {
+        "merged": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\intermediates\\res\\merged\\debug\\raw_bell.wav.flat",
+        "source": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\src\\main\\res\\raw\\bell.wav"
+    },
+    {
+        "merged": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher_foreground.png.flat",
+        "source": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_foreground.png"
+    },
+    {
+        "merged": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\build\\intermediates\\res\\merged\\debug\\font_roboto_bold.xml.flat",
+        "source": "C:\\Users\\krisb\\SleepApp\\SnorLabs\\SnorLabs_alphav1\\app\\src\\main\\res\\font\\roboto_bold.xml"
+    }
+]
